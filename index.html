@@ -13530,11 +13530,12 @@
 </style>
   <script>
     (function () { try {
-      var m = localStorage.getItem('rive-theme') || 'system';
-      var dark = m === 'dark' || (m === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      // Light is the fixed default. The app always opens white: the OS
+      // colour-scheme preference is ignored, and so is any dark choice left in
+      // storage by an earlier visit. Switching theme stays a session-only act.
       var de = document.documentElement;
-      de.setAttribute('data-theme', dark ? 'dark' : 'light');
-      de.setAttribute('data-theme-mode', m);
+      de.setAttribute('data-theme', 'light');
+      de.setAttribute('data-theme-mode', 'light');
     } catch (e) {} })();
   </script>
 <script>
@@ -13547,6 +13548,10 @@
   })();
 </script>
 <style>
+  /* The app is light by default and stays light when the OS is dark, so the
+     browser does not repaint scrollbars, date pickers or default form controls
+     in its own dark scheme. The dark theme sets color-scheme: dark itself. */
+  html { color-scheme: light; }
   /* ===== Surface / neutral token palette - applied to app surfaces (light + dark) ===== */
   :root {
     --brand-background: #FFFFFF; --brand-surface: #FFFFFF; --brand-foreground: #1A2230;
@@ -40888,36 +40893,37 @@ window.appIconSVG = function (name) {
 </script>
   <script>
     (function () {
-      var STORE = 'rive-theme';
       var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
       var seg = document.getElementById('pzThemeSeg');
-      function currentMode() { try { return localStorage.getItem(STORE) || 'system'; } catch (e) { return 'system'; } }
-      function resolve(mode) { return (mode === 'dark' || (mode === 'system' && mq && mq.matches)) ? 'dark' : 'light'; }
-      function apply(mode, save) {
-        document.documentElement.setAttribute('data-theme', resolve(mode));
-        document.documentElement.setAttribute('data-theme-mode', mode);
-        if (save) { try { localStorage.setItem(STORE, mode); } catch (e) {} }
+      // Held in memory, not localStorage: every load starts from light.
+      var mode = 'light';
+      function currentMode() { return mode; }
+      function resolve(m) { return (m === 'dark' || (m === 'system' && mq && mq.matches)) ? 'dark' : 'light'; }
+      function apply(m) {
+        mode = m;
+        document.documentElement.setAttribute('data-theme', resolve(m));
+        document.documentElement.setAttribute('data-theme-mode', m);
         if (window.__applyBrandForTheme) window.__applyBrandForTheme();
         if (seg) { seg.querySelectorAll('.pz-theme-opt').forEach(function (b) {
-          b.setAttribute('aria-pressed', b.getAttribute('data-theme-mode') === mode ? 'true' : 'false');
+          b.setAttribute('aria-pressed', b.getAttribute('data-theme-mode') === m ? 'true' : 'false');
         }); }
       }
       if (seg) {
         seg.addEventListener('click', function (e) {
           var b = e.target.closest('[data-theme-mode]'); if (!b) return;
-          var mode = b.getAttribute('data-theme-mode');
-          apply(mode, true);
-          if (window.__showToast) window.__showToast('Appearance set to ' + mode.charAt(0).toUpperCase() + mode.slice(1) + '.');
+          var picked = b.getAttribute('data-theme-mode');
+          apply(picked);
+          if (window.__showToast) window.__showToast('Appearance set to ' + picked.charAt(0).toUpperCase() + picked.slice(1) + ' for this session.');
         });
       }
       if (mq) {
-        var onCh = function () { if (currentMode() === 'system') apply('system', false); };
+        var onCh = function () { if (currentMode() === 'system') apply('system'); };
         if (mq.addEventListener) mq.addEventListener('change', onCh); else if (mq.addListener) mq.addListener(onCh);
       }
       // live brand-colour name
       var sw = document.getElementById('pzSwatches'), bn = document.getElementById('pzBrandName');
       if (sw && bn) { sw.addEventListener('click', function (e) { var x = e.target.closest('[data-brand]'); if (x) bn.textContent = x.getAttribute('aria-label'); }); }
-      apply(currentMode(), false);
+      apply('light');
     })();
   </script>
 
