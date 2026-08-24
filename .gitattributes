@@ -1,0 +1,3 @@
+# Multi-megabyte single-file prototypes: skip textual diffs, they are not useful
+# and they make every log/show command crawl.
+*.html -diff -merge
