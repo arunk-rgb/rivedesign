@@ -15326,18 +15326,11 @@
   html.rv-icons-pending .mi { visibility: hidden !important; }
   #rvBoot {
     position: fixed; inset: 0; z-index: 2147483000;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+    display: flex; align-items: center; justify-content: center;
     background: #FFFFFF;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     transition: opacity 340ms ease;
   }
   #rvBoot.rv-done { opacity: 0; pointer-events: none; }
-  .rv-boot-lockup { display: flex; align-items: center; gap: 13px; }
-  .rv-boot-mark { width: 38px; height: 38px; border-radius: 9px; overflow: hidden; display: block; flex-shrink: 0; }
-  .rv-boot-mark svg { display: block; width: 100%; height: 100%; }
-  .rv-boot-txt { display: flex; flex-direction: column; gap: 3px; }
-  .rv-boot-name { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; color: #16181D; line-height: 1; }
-  .rv-boot-sub { font-size: 12.5px; font-weight: 450; color: #6B7280; line-height: 1; }
   .rv-boot-bar { position: relative; width: 168px; height: 3px; border-radius: 2px; background: #E7E9EE; overflow: hidden; }
   .rv-boot-bar::after {
     content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 42%;
@@ -15353,13 +15346,6 @@
   }
 </style>
 <div id="rvBoot" role="status" aria-live="polite" aria-label="Loading Rive">
-  <div class="rv-boot-lockup">
-    <span class="rv-boot-mark" aria-hidden="true"><svg viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="256" height="256" fill="#00A21E"/><path d="M72.9044 183.032V107.531C72.9044 100.99 76.4011 94.9289 82.0644 91.6654L117.127 71.4258H90.3604L55.2976 91.6654C49.6344 94.9427 46.1377 100.99 46.1377 107.531V183.032H72.9044Z" fill="#F3FCE9"/><path d="M121.474 183.032V107.531C121.474 100.99 124.971 94.9289 130.634 91.6654L165.669 71.4258H138.902L103.84 91.6654C98.1764 94.9427 94.6797 100.99 94.6797 107.531V183.032H121.46H121.474Z" fill="#F3FCE9"/><path d="M170.002 183.032V107.531C170.002 100.99 173.499 94.9289 179.162 91.6654L214.225 71.4258H187.458L152.395 91.6654C146.732 94.9427 143.235 100.99 143.235 107.531V183.032H170.002Z" fill="#F3FCE9"/></svg></span>
-    <span class="rv-boot-txt">
-      <span class="rv-boot-name">Rive</span>
-      <span class="rv-boot-sub">Decision intelligence platform</span>
-    </span>
-  </div>
   <div class="rv-boot-bar" aria-hidden="true"></div>
 </div>
 <script>
