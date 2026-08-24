@@ -15600,6 +15600,8 @@
         <button class="ln-item" data-cbre-view="products"><span class="mi ico">inventory_2</span><span class="label">Product</span></button>
         <button class="ln-item" data-cbre-view="batches"><span class="mi ico">layers</span><span class="label">Batches</span></button>
         <button class="ln-item" data-cbre-view="cold-chain-intel"><span class="mi ico">ac_unit</span><span class="label">Cold Chain Intelligence</span></button>
+        <button class="ln-item" data-cbre-view="ontology"><span class="mi ico">account_tree</span><span class="label">Ontology</span></button>
+        <button class="ln-item" data-cbre-view="integrations"><span class="mi ico">cable</span><span class="label">Integrations</span></button>
 
         <div class="ln-section-label">Asset Management</div>
         <button class="ln-item" data-cbre-view="asset-list"><span class="mi ico">category</span><span class="label">Assets</span></button>
@@ -15628,6 +15630,8 @@
         <button class="ln-item" data-cbre-view="shipments"><span class="mi ico">local_shipping</span><span class="label">Shipments</span></button>
         <button class="ln-item" data-cbre-view="products"><span class="mi ico">inventory_2</span><span class="label">Product</span></button>
         <button class="ln-item" data-cbre-view="batches"><span class="mi ico">layers</span><span class="label">Batches</span></button>
+
+        <div class="ln-section-label">Intelligence</div>
         <button class="ln-item" data-cbre-view="cold-chain-intel"><span class="mi ico">ac_unit</span><span class="label">Cold Chain Intelligence</span></button>
 
         <div class="ln-section-label">Analytics</div>
@@ -32488,6 +32492,8 @@ window.appIconSVG = function (name) {
       { name: 'Product',             icon: 'inventory_2',    color: '#0EA5E9', view: 'products', desc: 'Product catalogue & SKUs' },
       { name: 'Batches',             icon: 'layers',         color: '#0D9488', view: 'batches', desc: 'Lots, expiry & quality' },
       { name: 'Cold Chain Intelligence', icon: 'ac_unit',    color: '#2563EB', view: 'cold-chain-intel', desc: 'AI recommendations & actions' },
+      { name: 'Ontology',            icon: 'account_tree', color: '#B45309', view: 'ontology', desc: 'Object types & links' },
+      { name: 'Integrations',         icon: 'cable',        color: '#475569', view: 'integrations', desc: 'SAP, OTM, project44 & more' },
     ]},
     { label: 'Asset Management', items: [
       { name: 'Assets',              icon: 'category',     color: '#0EA5E9', view: 'asset-list', desc: 'Physical & digital assets' },
@@ -32516,6 +32522,8 @@ window.appIconSVG = function (name) {
       { name: 'Shipments',           icon: 'local_shipping', color: '#7C3AED', view: 'shipments', desc: 'Loads, tracking & delivery' },
       { name: 'Product',             icon: 'inventory_2',    color: '#0EA5E9', view: 'products', desc: 'Product catalogue & SKUs' },
       { name: 'Batches',             icon: 'layers',         color: '#0D9488', view: 'batches', desc: 'Lots, expiry & quality' },
+    ]},
+    { label: 'Intelligence', items: [
       { name: 'Cold Chain Intelligence', icon: 'ac_unit',    color: '#2563EB', view: 'cold-chain-intel', desc: 'AI recommendations & actions' },
     ]},
     { label: 'Analytics', items: [
@@ -32546,7 +32554,7 @@ window.appIconSVG = function (name) {
   // Favourites: live, toggleable set. Resolve app defs by name from the non-Favourites groups.
   const APPS = {};
   GROUPS.filter(g => g.label !== 'Favourites').forEach(g => g.items.forEach(a => { if (!APPS[a.name]) APPS[a.name] = a; }));
-  const favs = new Set(['Lanes', 'Sales Order', 'Shipments', 'Assets', 'Product', 'Batches', 'Cold Chain Intelligence']);
+  const favs = new Set(['Lanes', 'Sales Order', 'Shipments', 'Assets', 'Product', 'Batches', 'Cold Chain Intelligence', 'Ontology', 'Integrations']);
 
   const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const lighten = (hex, amt) => { const n = parseInt(hex.slice(1), 16); let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255; r = Math.round(r + (255 - r) * amt); g = Math.round(g + (255 - g) * amt); b = Math.round(b + (255 - b) * amt); return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1); };
