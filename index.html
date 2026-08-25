@@ -18991,31 +18991,19 @@ window.__renderThumbImg = function (el, url, name) {
       .onto-elabel .r { display: inline-flex; align-items: center; gap: 3px; font-size: 9px; font-weight: 500; color: var(--gh-muted-2, #99999E); background: var(--surf-lo, #FAFBFC); padding: 0 4px; white-space: nowrap; }
 
       .onto-node { position: absolute; width: 232px; background: var(--surface-default, #fff); border: 1px solid var(--gh-line, #DDE1E7); border-radius: 5px; box-shadow: 0 1px 3px rgba(16,24,40,0.09); z-index: 3; cursor: pointer; }
-      .onto-node.sel { border-color: var(--onto-c, var(--primary)); box-shadow: 0 0 0 2px var(--onto-c, var(--primary)), 0 6px 18px rgba(15,23,42,0.14); z-index: 5; }
+      .onto-node.sel { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary), 0 6px 18px rgba(15,23,42,0.14); z-index: 5; }
       .onto-node.dim { opacity: 0.4; }
-      .onto-node-h { display: flex; align-items: center; gap: 7px; padding: 7px 9px; border-radius: 4px 4px 0 0; background: var(--onto-bg, #EEF1F5); border-bottom: 1px solid rgba(15,23,42,0.10); cursor: grab; }
+      /* Neutral card: identity only, no per-object colour. */
+      .onto-node-h { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border-radius: 4px 4px 0 0; background: var(--surf-lo, #F7F8FA); border-bottom: 1px solid var(--gh-line-soft, #EEF0F3); cursor: grab; }
       .onto-node.dragging .onto-node-h { cursor: grabbing; }
-      .onto-node-n { flex: 1; min-width: 0; font-size: 10.5px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--onto-fg, #26303C); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .onto-node-h .mi { font-size: 15px; color: var(--onto-fg, #26303C); opacity: 0.75; }
-      .onto-row { display: flex; align-items: center; gap: 8px; padding: 4px 9px; border-top: 1px solid var(--gh-line-soft, #F0F2F5); font-size: 10.5px; line-height: 1.5; }
-      .onto-row:first-of-type { border-top: none; }
-      .onto-row:hover { background: var(--surf-lo, #F7F9FB); }
-      .onto-row.sys { display: none; }
-      .onto-node.show-sys .onto-row.sys { display: flex; }
-      .onto-row-n { flex: 1; min-width: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 9.5px; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .onto-req { color: var(--error-solid, #D93035); font-weight: 700; margin-left: 2px; }
-      .onto-pk { font-size: 8px; font-weight: 800; letter-spacing: 0.04em; color: #B4790F; margin-right: 3px; }
-      .onto-row-t { font-size: 9px; color: var(--gh-muted, #6B7280); white-space: nowrap; flex-shrink: 0; }
-      /* Connection stubs on the card edges */
-      .onto-port { position: absolute; top: 50%; width: 7px; height: 7px; border-radius: 50%; background: var(--onto-c, #C0C6CF); transform: translateY(-50%); }
+      .onto-node-n { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .onto-node-h .mi { font-size: 16px; color: var(--gh-muted, #6B7280); flex-shrink: 0; }
+      /* The attribute list lives in the right panel; the card carries the count. */
+      .onto-node-meta { padding: 8px 11px; font-size: 11.5px; color: var(--gh-muted, #6B7280); }
+      .onto-node-meta b { font-weight: 650; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+      .onto-port { position: absolute; top: 50%; width: 7px; height: 7px; border-radius: 50%; background: var(--gh-line-strong, #C0C6CF); transform: translateY(-50%); }
       .onto-port.l { left: -4px; } .onto-port.r { right: -4px; }
 
-      /* Hover chip for an attribute */
-      .onto-chip { position: fixed; z-index: 240; background: var(--surface-default, #fff); border: 1px solid var(--gh-line, #E2E5EB); border-radius: 5px; box-shadow: 0 8px 24px rgba(15,23,42,0.16); padding: 7px 10px; pointer-events: none; max-width: 260px; }
-      .onto-chip[hidden] { display: none; }
-      .onto-chip-n { font-size: 12px; font-weight: 650; color: var(--text-primary); }
-      .onto-chip-t { font-size: 11px; color: var(--gh-muted, #6B7280); margin-top: 2px; }
-      .onto-chip-d { font-size: 11px; line-height: 1.45; color: var(--gh-ink-soft, #3A3A40); margin-top: 5px; }
 
       /* Minimap + zoom */
       .onto-minimap { position: absolute; left: 16px; bottom: 16px; z-index: 6; width: 198px; height: 132px; background: var(--surface-default, #fff); border: 1px solid var(--gh-line, #E2E5EB); border-radius: 5px; box-shadow: 0 3px 12px rgba(15,23,42,0.10); overflow: hidden; cursor: pointer; }
@@ -19153,7 +19141,7 @@ window.__renderThumbImg = function (el, url, name) {
           <!-- Graph mode -->
           <div class="onto-stage" id="ontoStage">
             <div class="onto-tools" id="ontoTools">
-              <button class="onto-tbtn on" type="button" data-onto-tool="sys"><span class="onto-check"><span class="mi">check</span></span>Show system fields</button>
+              <button class="onto-tbtn on" type="button" data-onto-tool="sys"><span class="onto-check"><span class="mi">check</span></span>Count system attributes</button>
               <span class="onto-tsep"></span>
               <button class="onto-tbtn" type="button" data-onto-tool="arrange"><span class="mi">dashboard</span>Auto-arrange</button>
               <span class="onto-tsep"></span>
@@ -19195,7 +19183,6 @@ window.__renderThumbImg = function (el, url, name) {
           </aside>
         </div>
       </div>
-      <div class="onto-chip" id="ontoChip" hidden></div>
     </div>
     <!-- ===== /ONTOLOGY VIEW ===== -->
     <script>
@@ -19970,7 +19957,7 @@ window.__renderThumbImg = function (el, url, name) {
       const toast = m => { if (window.__showToast) window.__showToast(m); };
 
       const stage = $('ontoStage'), world = $('ontoWorld'), svg = $('ontoEdges');
-      const COL_W = 232, COL_GAP = 158, ROW_GAP = 46;
+      const COL_W = 232, COL_GAP = 158, ROW_GAP = 34;
       let VIEW = { x: 40, y: 40, k: 0.75 };
       let SEL = null, TAB = 'props', SHOW_SYS = true, MODE = 'graph';
       const POS = {};
@@ -19983,15 +19970,12 @@ window.__renderThumbImg = function (el, url, name) {
 
       /* ---------- nodes ---------- */
       function nodeHTML(t) {
-        const rows = t.props.map(p =>
-          '<div class="onto-row' + (p.sys ? ' sys' : '') + '" data-onto-prop="' + esc(p.a) + '">' +
-            '<span class="onto-row-n">' + (p.pk ? '<span class="onto-pk">PK</span>' : '') + esc(p.n) + (p.req ? '<span class="onto-req">*</span>' : '') + '</span>' +
-            '<span class="onto-row-t">' + esc(p.t) + '</span>' +
-          '</div>').join('');
-        return '<div class="onto-node' + (SHOW_SYS ? ' show-sys' : '') + '" data-onto-node="' + t.key + '" style="--onto-bg:' + t.bg + ';--onto-fg:' + t.fg + ';--onto-c:' + t.c + '">' +
+        const all = t.props.length, core = t.props.filter(x => !x.sys).length;
+        return '<div class="onto-node" data-onto-node="' + t.key + '">' +
           '<span class="onto-port l"></span><span class="onto-port r"></span>' +
-          '<div class="onto-node-h"><span class="onto-node-n">' + esc(t.name) + '</span><span class="mi">' + t.icon + '</span></div>' +
-          rows +
+          '<div class="onto-node-h"><span class="mi">' + t.icon + '</span><span class="onto-node-n">' + esc(t.name) + '</span></div>' +
+          '<div class="onto-node-meta"><b class="onto-count" data-core="' + core + '" data-all="' + all + '">' +
+            (SHOW_SYS ? all : core) + '</b> attributes</div>' +
         '</div>';
       }
       function renderNodes() {
@@ -20265,12 +20249,11 @@ window.__renderThumbImg = function (el, url, name) {
         $('ontoLegend').innerHTML = '<div class="onto-legend-t">Object groups</div>' +
           GROUPS.map(g => {
             const n = T.filter(t => t.group === g.g).length;
-            return '<div class="onto-legend-row"><span class="onto-legend-sw" style="background:' + g.c + '"></span>' + esc(g.g) + '<span class="onto-legend-n">' + n + '</span></div>';
+            return '<div class="onto-legend-row">' + esc(g.g) + '<span class="onto-legend-n">' + n + '</span></div>';
           }).join('') +
           '<div class="onto-legend-rule"></div>' +
-          '<div class="onto-legend-row"><span class="onto-pk">PK</span>Primary key</div>' +
-          '<div class="onto-legend-row"><span class="onto-req" style="font-size:14px">*</span>Required attribute</div>' +
-          '<div class="onto-legend-row"><span style="font-size:11px;color:var(--gh-muted)">&#8617;</span>Reverse link name</div>';
+          '<div class="onto-legend-row"><span style="font-size:11px;color:var(--gh-muted)">&#8617;</span>Reverse link name</div>' +
+          '<div class="onto-legend-row" style="color:var(--gh-muted);font-size:11.5px">Select an object type for its attributes.</div>';
       }
 
       /* ---------- wiring ---------- */
@@ -20282,7 +20265,7 @@ window.__renderThumbImg = function (el, url, name) {
         $('ontoStudio').hidden = MODE !== 'studio';
         $('ontoCrumb').textContent = MODE === 'graph' ? 'Ontology' : 'Business Object Studio';
         if (MODE === 'studio') renderTable();
-        else { layout(); VIEW.k = 0.62; applyView(); centerOn(SEL || 'shipment'); }
+        else { layout(); fit(); }
       });
       $('ontoTools').addEventListener('click', e => {
         const b = e.target.closest('[data-onto-tool]'); if (!b) return;
@@ -20290,8 +20273,9 @@ window.__renderThumbImg = function (el, url, name) {
         if (k === 'sys') {
           SHOW_SYS = !SHOW_SYS;
           b.classList.toggle('on', SHOW_SYS);
-          world.querySelectorAll('.onto-node').forEach(n => n.classList.toggle('show-sys', SHOW_SYS));
-          layout();
+          world.querySelectorAll('.onto-count').forEach(c => {
+            c.textContent = SHOW_SYS ? c.dataset.all : c.dataset.core;
+          });
         } else if (k === 'arrange') {
           layout(); fit(); toast('Object types re-arranged by layer.');
         } else if (k === 'legend') {
@@ -20300,25 +20284,8 @@ window.__renderThumbImg = function (el, url, name) {
       });
       world.addEventListener('click', e => {
         const n = e.target.closest('[data-onto-node]'); if (!n) return;
-        const prop = e.target.closest('[data-onto-prop]');
-        select(n.dataset.ontoNode, { tab: prop ? 'props' : 'props' });
+        select(n.dataset.ontoNode);
       });
-      /* Property hover chip on the canvas */
-      const chip = $('ontoChip');
-      world.addEventListener('mouseover', e => {
-        const r = e.target.closest('[data-onto-prop]'); if (!r) return;
-        const t = byKey[r.closest('[data-onto-node]').dataset.ontoNode];
-        const p = t.props.find(x => x.a === r.dataset.ontoProp); if (!p) return;
-        chip.innerHTML = '<div class="onto-chip-n">' + esc(p.n) + (p.req ? '<span class="onto-req">*</span>' : '') + '</div>' +
-          '<div class="onto-chip-t">' + esc(p.t) + ' · ' + esc(p.a) + '</div>' +
-          (p.d ? '<div class="onto-chip-d">' + esc(p.d) + '</div>' : '');
-        chip.hidden = false;
-        const b = r.getBoundingClientRect();
-        chip.style.left = Math.min(window.innerWidth - chip.offsetWidth - 12, b.right + 10) + 'px';
-        chip.style.top = Math.min(window.innerHeight - chip.offsetHeight - 12, b.top - 4) + 'px';
-      });
-      world.addEventListener('mouseout', e => { if (e.target.closest('[data-onto-prop]')) chip.hidden = true; });
-      stage.addEventListener('pointerdown', () => { chip.hidden = true; });
 
       $('ontoPanelInner').addEventListener('click', e => {
         if (e.target.closest('[data-onto-close]')) { select(null); return; }
@@ -20395,9 +20362,8 @@ window.__renderThumbImg = function (el, url, name) {
         $('ontoStage').hidden = false; $('ontoStudio').hidden = true;
         $('ontoCrumb').textContent = 'Ontology';
         $('ontoLegend').hidden = true;
-        // Open at a readable zoom on the busiest type rather than fitting the
-        // whole model, which lands around 28% and is too small to read.
-        requestAnimationFrame(() => { layout(); VIEW.k = 0.62; applyView(); centerOn('shipment'); });
+        // Cards carry a name and a count now, so the whole model fits legibly.
+        requestAnimationFrame(() => { layout(); fit(); });
       };
       window.addEventListener('resize', () => { if (!root.hidden && MODE === 'graph') renderMinimap(); });
     })();
